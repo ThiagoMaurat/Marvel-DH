@@ -1,8 +1,12 @@
-import type { NextPage } from "next";
+import type { GetServerSideProps } from "next";
 import Head from "next/head";
 import BodySingle from "dh-marvel/components/layouts/body/single/body-single";
+import { getComics } from "dh-marvel/services/marvel/marvel.service";
+import CardHero from "dh-marvel/components/card/card-hero";
+import { GetComic } from "types/getComic";
 
-const Index: NextPage = () => {
+export default function Index({ data }: GetComic) {
+  console.log(data);
   return (
     <>
       <Head>
@@ -11,9 +15,21 @@ const Index: NextPage = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <BodySingle title={"Sample"}></BodySingle>
+      <BodySingle title={"Sample"}>
+        {data?.results?.map((comic) => {
+          return <CardHero {...comic} />;
+        })}
+      </BodySingle>
     </>
   );
-};
+}
 
-export default Index;
+export const getServerSideProps: GetServerSideProps = async () => {
+  const { data } = await getComics(12, 12);
+
+  return {
+    props: {
+      data,
+    },
+  };
+};

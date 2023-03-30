@@ -1,4 +1,6 @@
+import { GetComics } from "types/getComics";
 import { generateAuthenticationString } from "dh-marvel/services/marvel/marvel-auth.service";
+import { GetComic } from "types/getComic";
 
 const MARVEL_API_URL = process.env.NEXT_PUBLIC_MARVEL_API_URL;
 
@@ -13,7 +15,7 @@ export const getComics = async (offset?: number, limit?: number) => {
   const params = new URLSearchParams();
   if (offset) params.set("offset", `${offset}`);
   if (limit) params.set("limit", `${limit}`);
-  return fetchApi("comics", params.toString());
+  return fetchApi("comics", params.toString()) as unknown as GetComics;
 };
 
 export const getComic = async (comicId: number) => {
@@ -30,7 +32,7 @@ export const getComic = async (comicId: number) => {
       comic.oldPrice = 87;
       comic.stock = 2;
     }
-    return comic;
+    return comic as GetComic;
   } else return null;
 };
 

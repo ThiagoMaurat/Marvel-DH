@@ -5,16 +5,11 @@ import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
+import { useRouter } from "next/router";
+import { Comic } from "types/getComics";
 
-interface CardHeroProps {
-  cardImage: string;
-  titleText: string;
-  descriptionText: string;
-  onClick: () => void;
-}
-
-export default function CardHero(props: CardHeroProps) {
-  const { cardImage, onClick, titleText, descriptionText } = props;
+export default function CardHero({ thumbnail, title, description, id }: Comic) {
+  const { push } = useRouter();
 
   return (
     <Card sx={{ maxWidth: 345 }}>
@@ -22,20 +17,21 @@ export default function CardHero(props: CardHeroProps) {
         component="img"
         alt="card-hero-image"
         height="140"
-        image={cardImage}
+        image={`${thumbnail.path}.${thumbnail.extension}`}
       />
-      <CardContent sx={{ background: "#181A1B" }}>
+      <CardContent>
         <Typography gutterBottom variant="h5" component="div">
-          {titleText}
+          {title}
         </Typography>
         <Typography variant="body2" color="text.secondary">
-          {descriptionText}
+          {description}
         </Typography>
       </CardContent>
-      <CardActions sx={{ background: "#181A1B" }}>
-        <Button onClick={onClick} size="small">
-          Saiba mais
+      <CardActions>
+        <Button onClick={() => push(`/comics/${id}`)} size="small">
+          Comprar
         </Button>
+        <Button size="small">Ver Detalhes</Button>
       </CardActions>
     </Card>
   );

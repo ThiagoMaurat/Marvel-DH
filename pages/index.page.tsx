@@ -3,10 +3,10 @@ import Head from "next/head";
 import BodySingle from "dh-marvel/components/layouts/body/single/body-single";
 import { getComics } from "dh-marvel/services/marvel/marvel.service";
 import CardHero from "dh-marvel/components/card/card-hero";
-import { GetComic } from "types/getComic";
+import { Comic } from "types/getComic";
+import Grid2 from "@mui/material/Unstable_Grid2/Grid2";
 
-export default function Index({ data }: GetComic) {
-  console.log(data);
+export default function Index({ data }: { data: Comic[] }) {
   return (
     <>
       <Head>
@@ -16,20 +16,28 @@ export default function Index({ data }: GetComic) {
       </Head>
 
       <BodySingle title={"Sample"}>
-        {data?.results?.map((comic) => {
-          return <CardHero {...comic} />;
-        })}
+        <Grid2 container spacing={3} justifyContent="center">
+          {data?.map((comic) => (
+            <Grid2 xs={12} sm={6} md={4}>
+              <CardHero {...comic} />
+            </Grid2>
+          ))}
+        </Grid2>
       </BodySingle>
     </>
   );
 }
 
 export const getServerSideProps: GetServerSideProps = async () => {
-  const { data } = await getComics(12, 12);
+  const { data: comics } = await getComics(100, 100);
+
+  const data = comics.results
+    .filter((comic) => !!comic.thumbnail && !!comic.description)
+    .slice(0, 12);
 
   return {
     props: {
-      data,
+      data: data,
     },
   };
 };

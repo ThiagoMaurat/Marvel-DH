@@ -16,7 +16,12 @@ export default function Index({ data }: { data: Comic[] }) {
       </Head>
 
       <BodySingle title={"Sample"}>
-        <Grid2 container spacing={3} justifyContent="center">
+        <Grid2
+          sx={{ padding: "2rem" }}
+          container
+          spacing={3}
+          justifyContent="center"
+        >
           {data?.map((comic) => (
             <Grid2 xs={12} sm={6} md={4}>
               <CardHero {...comic} />

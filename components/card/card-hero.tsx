@@ -7,24 +7,27 @@ import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import { useRouter } from "next/router";
 import { Comic } from "types/getComics";
+import { Tooltip } from "@mui/material";
+import { letterCounter } from "helper/letterCounter";
 
 export default function CardHero({ thumbnail, title, description, id }: Comic) {
   const { push } = useRouter();
 
   return (
-    <Card sx={{ maxWidth: 345 }}>
+    <Card sx={{ maxWidth: 350, height: 500 }}>
       <CardMedia
         component="img"
         alt="card-hero-image"
-        height="140"
+        height="250"
         image={`${thumbnail.path}.${thumbnail.extension}`}
+        sx={{ objectFit: "cover", objectPosition: "35% 25%" }}
       />
       <CardContent>
         <Typography gutterBottom variant="h5" component="div">
           {title}
         </Typography>
         <Typography variant="body2" color="text.secondary">
-          {description}
+          {letterCounter(description, 120)}
         </Typography>
       </CardContent>
       <CardActions>

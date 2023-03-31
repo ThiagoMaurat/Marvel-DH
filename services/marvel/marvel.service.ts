@@ -1,6 +1,5 @@
-import { GetComics } from "types/getComics";
+import { Comic, GetComics } from "types/getComics";
 import { generateAuthenticationString } from "dh-marvel/services/marvel/marvel-auth.service";
-import { GetComic } from "types/getComic";
 
 const MARVEL_API_URL = process.env.NEXT_PUBLIC_MARVEL_API_URL;
 
@@ -32,7 +31,7 @@ export const getComic = async (comicId: number) => {
       comic.oldPrice = 87;
       comic.stock = 2;
     }
-    return comic as GetComic;
+    return comic as Comic;
   } else return null;
 };
 

@@ -7,14 +7,21 @@ import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import { useRouter } from "next/router";
 import { Comic } from "types/getComics";
-import { Tooltip } from "@mui/material";
 import { letterCounter } from "helper/letterCounter";
 
 export default function CardHero({ thumbnail, title, description, id }: Comic) {
   const { push } = useRouter();
 
   return (
-    <Card sx={{ maxWidth: 350, height: 500 }}>
+    <Card
+      sx={{
+        maxWidth: 350,
+        height: 500,
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "space-between",
+      }}
+    >
       <CardMedia
         component="img"
         alt="card-hero-image"
@@ -31,7 +38,7 @@ export default function CardHero({ thumbnail, title, description, id }: Comic) {
         </Typography>
       </CardContent>
       <CardActions>
-        <Button onClick={() => push(`/comics/${id}`)} size="small">
+        <Button onClick={() => push(`/character/${id}`)} size="small">
           Comprar
         </Button>
         <Button size="small">Ver Detalhes</Button>

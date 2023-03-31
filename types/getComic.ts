@@ -1,12 +1,3 @@
-export interface GetComic {
-  data: {
-    count: number;
-    limit: number;
-    total: number;
-    results: Comic[];
-  };
-}
-
 export interface Comic {
   id: number;
   digitalId: number;

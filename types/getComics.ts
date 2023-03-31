@@ -8,6 +8,10 @@ export interface GetComics {
 }
 
 export interface Comic {
+  characters: Characters;
+  collectedIssues: any[];
+  collections: any[];
+  creators: Creators;
   id: number;
   digitalId: number;
   title: string;
@@ -27,14 +31,10 @@ export interface Comic {
   urls: Url[];
   series: Series;
   variants: any[];
-  collections: any[];
-  collectedIssues: any[];
   dates: Date[];
   prices: Price[];
   thumbnail: Thumbnail;
   images: Image[];
-  creators: Creators;
-  characters: Characters;
   stories: Stories;
   events: Events;
 }

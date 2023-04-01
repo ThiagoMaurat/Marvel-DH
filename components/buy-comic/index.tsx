@@ -26,11 +26,6 @@ export default function ComicInfo(comic: Comic) {
 
   const thumb = `${thumbnail.path}.${thumbnail.extension}`;
 
-  console.log(
-    comic.characters.items.map((item) =>
-      getCharacterIdFromUrl(item.resourceURI)
-    )
-  );
   return (
     <Grid container padding={"3rem"}>
       <Grid item xs={12} md={6}>
@@ -41,14 +36,16 @@ export default function ComicInfo(comic: Comic) {
 
           <Box>
             <Typography component={"h3"}>Personagens</Typography>
-            <List>
+            <List sx={{ gap: "10px" }}>
               {characters.items.map((character) => (
                 <Link
                   href={`/character/${getCharacterIdFromUrl(
                     character.resourceURI
                   )}`}
                 >
-                  <ListItem>{`${character.name}`}</ListItem>
+                  <ListItem
+                    sx={{ cursor: "pointer" }}
+                  >{`${character.name}`}</ListItem>
                 </Link>
               ))}
             </List>

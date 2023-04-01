@@ -21,6 +21,8 @@ export interface Comic {
   collections: any[];
   collectedIssues: any[];
   dates: Date[];
+  price: number;
+  stock: number;
   prices: Price[];
   thumbnail: Thumbnail;
   images: Image[];

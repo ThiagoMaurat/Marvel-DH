@@ -1,14 +1,12 @@
+import ComicInfo from "dh-marvel/components/buy-comic";
 import { getComic, getComics } from "dh-marvel/services/marvel/marvel.service";
 import { GetStaticPaths, GetStaticPropsContext } from "next";
 import React from "react";
+import { Comic } from "types/getComic";
 
-export default function Index(data: any) {
+export default function Index(data: Comic) {
   console.log(data);
-  return (
-    <>
-      <h2>asd</h2>
-    </>
-  );
+  return <ComicInfo {...data} />;
 }
 
 export const getStaticPaths: GetStaticPaths = async () => {
@@ -40,7 +38,9 @@ export const getStaticProps = async (ctx: GetStaticPropsContext<Params>) => {
   const { params } = ctx;
 
   const comic = await getComic(Number(params?.id));
+
   if (!comic) return;
+
   return {
     props: comic,
   };

@@ -38,7 +38,7 @@ export default function CardHero({ thumbnail, title, description, id }: Comic) {
         </Typography>
       </CardContent>
       <CardActions>
-        <Button onClick={() => push(`/character/${id}`)} size="small">
+        <Button onClick={() => push(`/comic/${id}`)} size="small">
           Comprar
         </Button>
         <Button size="small">Ver Detalhes</Button>

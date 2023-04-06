@@ -7,7 +7,16 @@ export default function FirstStep() {
   const { control } = useFormContext();
 
   return (
-    <Box>
+    <Box
+      display={"flex"}
+      gap={"1rem"}
+      flexDirection={"column"}
+      width={"100%"}
+      maxWidth={"350px"}
+      margin={"0 auto"}
+      paddingY={"4rem"}
+      paddingX={"1.5rem"}
+    >
       <FieldController
         inputProps={{ placeholder: "Name" }}
         control={control}
@@ -18,6 +27,12 @@ export default function FirstStep() {
         inputProps={{ placeholder: "LastName" }}
         control={control}
         name="customer.lastname"
+      />
+
+      <FieldController
+        inputProps={{ placeholder: "Email", type: "email" }}
+        control={control}
+        name="customer.email"
       />
     </Box>
   );

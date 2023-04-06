@@ -20,6 +20,41 @@ export default function SecondStep() {
       paddingY={"4rem"}
       paddingX={"1.5rem"}
     >
+      <FieldController
+        inputProps={{ placeholder: "Endereço" }}
+        control={control}
+        name="customer.adress.address1"
+        label="Endereço"
+      />
+
+      <FieldController
+        inputProps={{ placeholder: "Endereço 2" }}
+        control={control}
+        name="customer.adress.address2"
+        label="Endereço 2"
+      />
+
+      <FieldController
+        inputProps={{ placeholder: "Cidade" }}
+        control={control}
+        name="customer.adress.city"
+        label="Cidade"
+      />
+
+      <FieldController
+        inputProps={{ placeholder: "Estado" }}
+        control={control}
+        name="customer.adress.state"
+        label="Estado"
+      />
+
+      <FieldController
+        inputProps={{ placeholder: "Código Postal" }}
+        control={control}
+        name="customer.adress.zipCode"
+        label="Código Postal"
+      />
+
       <Button onClick={() => setStep(2)}>Próximo Step</Button>
     </Box>
   );

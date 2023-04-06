@@ -36,7 +36,7 @@ export default function ComicInfo(comic: Comic) {
 
           <Box>
             <Typography component={"h3"}>Personagens</Typography>
-            <List sx={{ gap: "10px" }}>
+            <List sx={{ gap: "10px", width: "fit-content" }}>
               {characters.items.map((character) => {
                 const characterId = character.resourceURI
                   ? encodeURIComponent(
@@ -46,7 +46,10 @@ export default function ComicInfo(comic: Comic) {
                 return (
                   <Link href={`/character/${characterId}`}>
                     <ListItem
-                      sx={{ cursor: "pointer" }}
+                      sx={{
+                        cursor: "pointer",
+                        "&:hover": { color: "#1976d2" },
+                      }}
                     >{`${character.name}`}</ListItem>
                   </Link>
                 );

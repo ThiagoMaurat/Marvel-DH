@@ -26,13 +26,19 @@ export default function CharacterInfo(comic: Character) {
             {name}
           </Typography>
 
-          <Typography variant="h4" component="h4">
-            {description ?? "Sem descrição"}
-          </Typography>
+          {description ? (
+            <Typography variant="h4" component="h4">
+              {description}
+            </Typography>
+          ) : (
+            <Typography variant="h4" component="h4">
+              Sem descrição
+            </Typography>
+          )}
 
           <Box>
             <Typography component={"h3"}>Comics:</Typography>
-            <List sx={{ gap: "10px" }}>
+            <List sx={{ gap: "10px", width: "fit-content" }}>
               {comics.items.map((comics) => {
                 const characterId = comics.resourceURI
                   ? encodeURIComponent(getComicIdFromUrl(comics.resourceURI))
@@ -40,7 +46,10 @@ export default function CharacterInfo(comic: Character) {
                 return (
                   <Link href={`/comic/${characterId}`}>
                     <ListItem
-                      sx={{ cursor: "pointer" }}
+                      sx={{
+                        cursor: "pointer",
+                        "&:hover": { color: "#1976d2" },
+                      }}
                     >{`${comics.name}`}</ListItem>
                   </Link>
                 );

@@ -7,7 +7,6 @@ import {
   Box,
 } from "@mui/material";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-import { fetchApi } from "dh-marvel/services/marvel/marvel.service";
 import { faqsData } from "dh-marvel/components/faqs/faqsData";
 
 type AccordionItemProps = {

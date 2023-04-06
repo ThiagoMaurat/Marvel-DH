@@ -23,35 +23,35 @@ export default function SecondStep() {
       <FieldController
         inputProps={{ placeholder: "Endereço" }}
         control={control}
-        name="customer.adress.address1"
+        name="customer.address.address1"
         label="Endereço"
       />
 
       <FieldController
         inputProps={{ placeholder: "Endereço 2" }}
         control={control}
-        name="customer.adress.address2"
+        name="customer.address.address2"
         label="Endereço 2"
       />
 
       <FieldController
         inputProps={{ placeholder: "Cidade" }}
         control={control}
-        name="customer.adress.city"
+        name="customer.address.city"
         label="Cidade"
       />
 
       <FieldController
         inputProps={{ placeholder: "Estado" }}
         control={control}
-        name="customer.adress.state"
+        name="customer.address.state"
         label="Estado"
       />
 
       <FieldController
         inputProps={{ placeholder: "Código Postal" }}
         control={control}
-        name="customer.adress.zipCode"
+        name="customer.address.zipCode"
         label="Código Postal"
       />
 

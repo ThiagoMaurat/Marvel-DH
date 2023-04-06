@@ -41,7 +41,11 @@ export default function Checkout() {
 
         {currentStep === 0 && <FirstStep />}
 
-        {currentStep === 0 && <SecondStep />}
+        {currentStep === 1 && <SecondStep />}
+
+        <Button type="submit" onClick={() => setStep(2)}>
+          submit
+        </Button>
       </form>
     </FormProvider>
   );

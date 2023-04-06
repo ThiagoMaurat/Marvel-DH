@@ -1,10 +1,11 @@
+import CharacterInfo from "dh-marvel/components/character-card";
 import { getCharacter } from "dh-marvel/services/marvel/marvel.service";
 import { GetServerSideProps, GetServerSidePropsContext } from "next";
 import React from "react";
+import { Character } from "types/getCharacter";
 
-export default function Character(data: any) {
-  console.log(data);
-  return <div>Character</div>;
+export default function Index({ data }: { data: Character }) {
+  return <CharacterInfo {...data} />;
 }
 
 type Params = {
@@ -17,17 +18,12 @@ export const getServerSideProps: GetServerSideProps<any, Params> = async (
   const { params } = context;
 
   if (params?.id) {
-    const comics = await getCharacter(Number(params.id));
-
-    //   if (!comics) {
-    //     return {
-    //       notFound: true,
-    //     };
-    //   }
-
+    const characters = await getCharacter(
+      Number(decodeURIComponent(params.id))
+    );
     return {
       props: {
-        data: comics,
+        data: characters,
       },
     };
   }

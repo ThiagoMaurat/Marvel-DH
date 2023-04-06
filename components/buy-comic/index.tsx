@@ -37,17 +37,20 @@ export default function ComicInfo(comic: Comic) {
           <Box>
             <Typography component={"h3"}>Personagens</Typography>
             <List sx={{ gap: "10px" }}>
-              {characters.items.map((character) => (
-                <Link
-                  href={`/character/${getCharacterIdFromUrl(
-                    character.resourceURI
-                  )}`}
-                >
-                  <ListItem
-                    sx={{ cursor: "pointer" }}
-                  >{`${character.name}`}</ListItem>
-                </Link>
-              ))}
+              {characters.items.map((character) => {
+                const characterId = character.resourceURI
+                  ? encodeURIComponent(
+                      getCharacterIdFromUrl(character.resourceURI)!
+                    )
+                  : "";
+                return (
+                  <Link href={`/character/${characterId}`}>
+                    <ListItem
+                      sx={{ cursor: "pointer" }}
+                    >{`${character.name}`}</ListItem>
+                  </Link>
+                );
+              })}
             </List>
           </Box>
 

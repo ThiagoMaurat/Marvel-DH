@@ -1,13 +1,12 @@
 import type { GetServerSideProps } from "next";
 import Head from "next/head";
 import BodySingle from "dh-marvel/components/layouts/body/single/body-single";
-import { getComic, getComics } from "dh-marvel/services/marvel/marvel.service";
+import { getComics } from "dh-marvel/services/marvel/marvel.service";
 import CardHero from "dh-marvel/components/card/card-hero";
 import { Comic } from "types/getComic";
 import Grid2 from "@mui/material/Unstable_Grid2/Grid2";
 
 export default function Index({ data }: { data: Comic[] }) {
-  getComic(2).then((data) => console.log(data));
   return (
     <>
       <Head>

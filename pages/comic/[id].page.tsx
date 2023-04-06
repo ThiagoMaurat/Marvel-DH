@@ -5,7 +5,6 @@ import React from "react";
 import { Comic } from "types/getComic";
 
 export default function Index(data: Comic) {
-  console.log(data);
   return <ComicInfo {...data} />;
 }
 

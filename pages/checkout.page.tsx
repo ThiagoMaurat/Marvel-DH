@@ -38,9 +38,7 @@ export default function Checkout() {
           ))}
         </Stepper>
 
-        <FirstStep />
-
-        <Button type="submit">Submit</Button>
+        {currentStep === 0 && <FirstStep />}
       </form>
     </FormProvider>
   );

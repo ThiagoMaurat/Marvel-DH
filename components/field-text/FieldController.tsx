@@ -1,4 +1,4 @@
-import { FormControl, InputProps, Typography } from "@mui/material";
+import { FormControl, FormLabel, InputProps, Typography } from "@mui/material";
 import React from "react";
 import { Control, Controller, FieldError } from "react-hook-form";
 import { FieldText } from ".";
@@ -9,22 +9,24 @@ type FieldTextProps = {
   name: string;
   defaultValue?: any;
   inputProps: InputProps;
+  label?: string;
 };
 
 export const FieldController = (props: FieldTextProps) => {
-  const { name, control, hookError, defaultValue, inputProps } = props;
+  const { name, label, control, hookError, defaultValue, inputProps } = props;
 
   return (
     <FormControl
       sx={{
         border: "none",
         width: "100%",
-        height: "45px",
         boxSizing: "border-box",
       }}
       error={!!hookError}
       fullWidth
     >
+      {!!label && <FormLabel htmlFor={name}>{label}</FormLabel>}
+
       <Controller
         name={name}
         control={control}

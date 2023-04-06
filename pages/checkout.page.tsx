@@ -1,7 +1,8 @@
-import { Stack, Step, StepLabel, Stepper } from "@mui/material";
+import { Button, Stack, Step, StepLabel, Stepper } from "@mui/material";
 import { useStepFormContext } from "contexts/steps";
 import { QontoStepIcon } from "dh-marvel/components/steps/QontoStepIcon";
 import { QontoConnector } from "dh-marvel/components/steps/Qontos";
+import FirstStep from "dh-marvel/features/checkout/FirstStep";
 import { CheckoutInput } from "dh-marvel/features/checkout/checkout.types";
 import { FormProvider, useForm } from "react-hook-form";
 
@@ -10,17 +11,20 @@ export default function Checkout() {
 
   const { currentStep, setStep } = useStepFormContext();
 
-  const { handleSubmit } = useForm<CheckoutInput>();
+  const methods = useForm<CheckoutInput>();
 
   const submitForm = (data: CheckoutInput) => {
     console.log(data);
   };
 
   return (
-    <FormProvider {...useForm()}>
+    <FormProvider {...methods}>
       <form
-        onSubmit={handleSubmit(submitForm)}
-        style={{ width: "100%", paddingTop: "2rem" }}
+        onSubmit={methods.handleSubmit(submitForm)}
+        style={{
+          width: "100%",
+          paddingTop: "2rem",
+        }}
       >
         <Stepper
           alternativeLabel
@@ -32,9 +36,11 @@ export default function Checkout() {
               <StepLabel StepIconComponent={QontoStepIcon}>{label}</StepLabel>
             </Step>
           ))}
-
-          {/* {currentStep === 0 && } */}
         </Stepper>
+
+        <FirstStep />
+
+        <Button type="submit">Submit</Button>
       </form>
     </FormProvider>
   );

@@ -1,15 +1,8 @@
-import {
-  Box,
-  Button,
-  Grid,
-  List,
-  ListItem,
-  Stack,
-  Typography,
-} from "@mui/material";
+import { Box, Button, Grid, List, ListItem, Typography } from "@mui/material";
 import { getCharacterIdFromUrl } from "helper/getCharacterId";
 import Image from "next/image";
 import Link from "next/link";
+import { useRouter } from "next/router";
 import React from "react";
 import { Comic } from "types/getComic";
 
@@ -23,6 +16,8 @@ import { Comic } from "types/getComic";
 
 export default function ComicInfo(comic: Comic) {
   const { title, thumbnail, prices, stock, characters } = comic;
+
+  const { push } = useRouter();
 
   const thumb = `${thumbnail.path}.${thumbnail.extension}`;
 
@@ -70,7 +65,7 @@ export default function ComicInfo(comic: Comic) {
             </List>
           </Box>
 
-          <Button disabled={stock <= 0}>
+          <Button onClick={() => push("/checkout")} disabled={stock <= 0}>
             {stock > 0 ? "Comprar" : "Sem estoque"}
           </Button>
         </Box>

@@ -3,15 +3,14 @@ import { useStepFormContext } from "contexts/steps";
 import { FieldController } from "dh-marvel/components/field-text/FieldController";
 import React from "react";
 import { useFormContext } from "react-hook-form";
-import { FieldErrors } from "react-hook-form";
 import { zodInfer } from "./schema";
 
-interface FirstStepProps {
-  errors: FieldErrors<zodInfer>;
-}
-
-export default function FirstStep(props: FirstStepProps) {
-  const { control, trigger } = useFormContext();
+export default function FirstStep() {
+  const {
+    control,
+    trigger,
+    formState: { errors },
+  } = useFormContext<zodInfer>();
 
   const { setStep } = useStepFormContext();
 
@@ -44,7 +43,7 @@ export default function FirstStep(props: FirstStepProps) {
         name="customer.name"
         defaultValue={""}
         label="Nome"
-        hookError={props?.errors?.customer?.name}
+        hookError={errors?.customer?.name}
       />
 
       <FieldController
@@ -53,7 +52,7 @@ export default function FirstStep(props: FirstStepProps) {
         name="customer.lastname"
         defaultValue={""}
         label="Sobrenome"
-        hookError={props?.errors?.customer?.lastname}
+        hookError={errors?.customer?.lastname}
       />
 
       <FieldController
@@ -62,7 +61,7 @@ export default function FirstStep(props: FirstStepProps) {
         label="E-mail"
         defaultValue={""}
         name="customer.email"
-        hookError={props?.errors?.customer?.email}
+        hookError={errors?.customer?.email}
       />
 
       <Button onClick={triggerErrors}>Próximo Step</Button>

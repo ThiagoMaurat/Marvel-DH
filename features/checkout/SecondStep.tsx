@@ -5,12 +5,12 @@ import React from "react";
 import { FieldErrors, useFormContext } from "react-hook-form";
 import { zodInfer } from "./schema";
 
-interface SecondStepProps {
-  errors: FieldErrors<zodInfer>;
-}
-
-export default function SecondStep(props: SecondStepProps) {
-  const { control, trigger } = useFormContext();
+export default function SecondStep() {
+  const {
+    control,
+    trigger,
+    formState: { errors },
+  } = useFormContext<zodInfer>();
 
   const { setStep } = useStepFormContext();
 
@@ -24,7 +24,7 @@ export default function SecondStep(props: SecondStepProps) {
     ]);
 
     if (nameValid && emailValid && lastnameValid) {
-      setStep(3);
+      setStep(2);
     }
   };
 
@@ -45,7 +45,7 @@ export default function SecondStep(props: SecondStepProps) {
         defaultValue={""}
         name="customer.address.address1"
         label="Endereço"
-        hookError={props.errors?.customer?.address?.address1}
+        hookError={errors?.customer?.address?.address1}
       />
 
       <FieldController
@@ -54,7 +54,7 @@ export default function SecondStep(props: SecondStepProps) {
         defaultValue={""}
         name="customer.address.address2"
         label="Endereço 2"
-        hookError={props.errors?.customer?.address?.address2}
+        hookError={errors?.customer?.address?.address2}
       />
 
       <FieldController
@@ -63,7 +63,7 @@ export default function SecondStep(props: SecondStepProps) {
         defaultValue={""}
         name="customer.address.city"
         label="Cidade"
-        hookError={props.errors?.customer?.address?.city}
+        hookError={errors?.customer?.address?.city}
       />
 
       <FieldController
@@ -72,7 +72,7 @@ export default function SecondStep(props: SecondStepProps) {
         defaultValue={""}
         name="customer.address.state"
         label="Estado"
-        hookError={props.errors?.customer?.address?.state}
+        hookError={errors?.customer?.address?.state}
       />
 
       <FieldController
@@ -81,7 +81,7 @@ export default function SecondStep(props: SecondStepProps) {
         defaultValue={""}
         name="customer.address.zipCode"
         label="Código Postal"
-        hookError={props.errors?.customer?.address?.zipCode}
+        hookError={errors?.customer?.address?.zipCode}
       />
 
       <Button onClick={triggerErrors}>Próximo Step</Button>

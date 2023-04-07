@@ -44,10 +44,10 @@ export const ThirdStep = () => {
       paddingX={"1.5rem"}
     >
       <Cards
-        number={card?.number}
-        expiry={card?.expDate}
-        cvc={card?.cvc}
-        name={card?.nameOnCard}
+        number={card?.number ?? ""}
+        expiry={card?.expDate ?? ""}
+        cvc={card?.cvc ?? ""}
+        name={card?.nameOnCard ?? ""}
       />
 
       <FieldController

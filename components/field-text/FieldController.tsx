@@ -1,7 +1,7 @@
 import { FormControl, FormLabel, InputProps, Typography } from "@mui/material";
 import React from "react";
-import { Control, Controller, FieldError } from "react-hook-form";
-import { FieldText } from ".";
+import { Control, Controller, FieldError, FieldErrors } from "react-hook-form";
+import FieldText from ".";
 
 type FieldTextProps = {
   hookError?: FieldError;
@@ -36,7 +36,7 @@ export const FieldController = (props: FieldTextProps) => {
         )}
       />
       <Typography fontFamily={"Ubuntu"} color="#F91C1C" fontSize={"15px"}>
-        {hookError && hookError.message}
+        {hookError && hookError?.message}
       </Typography>
     </FormControl>
   );

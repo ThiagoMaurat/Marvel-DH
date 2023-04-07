@@ -1,21 +1,29 @@
-import { Button, Stack, Step, StepLabel, Stepper } from "@mui/material";
+import { Button, Step, StepLabel, Stepper } from "@mui/material";
 import { useStepFormContext } from "contexts/steps";
 import { QontoStepIcon } from "dh-marvel/components/steps/QontoStepIcon";
 import { QontoConnector } from "dh-marvel/components/steps/Qontos";
 import FirstStep from "dh-marvel/features/checkout/FirstStep";
 import SecondStep from "dh-marvel/features/checkout/SecondStep";
-import { CheckoutInput } from "dh-marvel/features/checkout/checkout.types";
 import { FormProvider, useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { checkoutSchema, zodInfer } from "dh-marvel/features/checkout/schema";
 
 export default function Checkout() {
   const steps = ["Dados Pessoais", "Endereço", "Pagamento"];
 
-  const { currentStep, setStep } = useStepFormContext();
+  const { currentStep } = useStepFormContext();
 
-  const methods = useForm<CheckoutInput>();
+  const methods = useForm<zodInfer>({
+    resolver: zodResolver(checkoutSchema),
+    shouldUseNativeValidation: false,
+    mode: "all",
+  });
 
-  const submitForm = (data: CheckoutInput) => {
+  console.log(methods.formState.errors);
+
+  const submitForm = (data: zodInfer) => {
     console.log(data);
+    console.log(methods.formState.errors.customer);
   };
 
   return (
@@ -39,13 +47,11 @@ export default function Checkout() {
           ))}
         </Stepper>
 
-        {currentStep === 0 && <FirstStep />}
+        {currentStep === 0 && <FirstStep errors={methods.formState.errors} />}
 
-        {currentStep === 1 && <SecondStep />}
+        {currentStep === 1 && <SecondStep errors={methods.formState.errors} />}
 
-        <Button type="submit" onClick={() => setStep(2)}>
-          submit
-        </Button>
+        <Button type="submit">submit</Button>
       </form>
     </FormProvider>
   );

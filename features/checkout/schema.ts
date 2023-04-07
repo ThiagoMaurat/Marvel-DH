@@ -1,11 +1,11 @@
 import * as z from "zod";
 
 const addressSchema = z.object({
-  address1: z.string().nonempty(),
+  address1: z.string().nonempty("Endereço obrigatório"),
   address2: z.string().nullable(),
-  city: z.string().nonempty(),
-  state: z.string().nonempty(),
-  zipCode: z.string().nonempty(),
+  city: z.string().nonempty("Cidade obrigatória"),
+  state: z.string().nonempty("Estado obrigatório"),
+  zipCode: z.string().nonempty("Código Postal obrigatório"),
 });
 
 const cardSchema = z.object({

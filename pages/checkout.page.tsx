@@ -7,6 +7,7 @@ import SecondStep from "dh-marvel/features/checkout/SecondStep";
 import { FormProvider, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { checkoutSchema, zodInfer } from "dh-marvel/features/checkout/schema";
+import ThirdStep from "dh-marvel/features/checkout/ThirdStep";
 
 export default function Checkout() {
   const steps = ["Dados Pessoais", "Endereço", "Pagamento"];
@@ -50,6 +51,8 @@ export default function Checkout() {
         {currentStep === 0 && <FirstStep errors={methods.formState.errors} />}
 
         {currentStep === 1 && <SecondStep errors={methods.formState.errors} />}
+
+        {/* {currentStep === 2 && <ThirdStep errors={methods.formState.errors} />} */}
 
         <Button type="submit">submit</Button>
       </form>

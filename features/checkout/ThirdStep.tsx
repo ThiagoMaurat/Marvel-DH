@@ -6,6 +6,7 @@ import { FieldErrors, useFormContext } from "react-hook-form";
 import { zodInfer } from "./schema";
 import { useStepFormContext } from "contexts/steps";
 import { Box, Button } from "@mui/material";
+import FieldInputMaskController from "dh-marvel/components/field-mask/FieldMaskController";
 
 export const ThirdStep = () => {
   const {
@@ -50,7 +51,8 @@ export const ThirdStep = () => {
         name={card?.nameOnCard ?? ""}
       />
 
-      <FieldController
+      <FieldInputMaskController
+        mask={"9999 9999 9999 9999"}
         inputProps={{ placeholder: "Número" }}
         control={control}
         name="card.number"
@@ -59,7 +61,8 @@ export const ThirdStep = () => {
         hookError={errors?.card?.number}
       />
 
-      <FieldController
+      <FieldInputMaskController
+        mask={"999"}
         inputProps={{ placeholder: "CVC" }}
         control={control}
         name="card.cvc"
@@ -68,7 +71,8 @@ export const ThirdStep = () => {
         hookError={errors?.card?.cvc}
       />
 
-      <FieldController
+      <FieldInputMaskController
+        mask={"99/99"}
         inputProps={{ placeholder: "Vencimento" }}
         control={control}
         name="card.expDate"
@@ -86,9 +90,7 @@ export const ThirdStep = () => {
         hookError={errors?.card?.nameOnCard}
       />
 
-      <Button type="submit" onClick={triggerErrors}>
-        Finalizar
-      </Button>
+      <Button type="submit">Finalizar</Button>
     </Box>
   );
 };

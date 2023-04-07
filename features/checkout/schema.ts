@@ -15,12 +15,6 @@ const cardSchema = z.object({
   nameOnCard: z.string().nonempty(),
 });
 
-const orderSchema = z.object({
-  name: z.string().nonempty(),
-  image: z.string().nonempty(),
-  price: z.number().min(0),
-});
-
 export const checkoutSchema = z.object({
   customer: z.object({
     name: z.string().nonempty({ message: "Nome obrigatório" }),
@@ -32,7 +26,6 @@ export const checkoutSchema = z.object({
     address: addressSchema,
   }),
   card: cardSchema,
-  order: orderSchema,
 });
 
 export type zodInfer = z.infer<typeof checkoutSchema>;

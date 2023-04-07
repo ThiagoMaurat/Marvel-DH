@@ -53,8 +53,6 @@ export default function Checkout() {
         {currentStep === 1 && <SecondStep />}
 
         {currentStep === 2 && <ThirdStep />}
-
-        <Button type="submit">submit</Button>
       </form>
     </FormProvider>
   );

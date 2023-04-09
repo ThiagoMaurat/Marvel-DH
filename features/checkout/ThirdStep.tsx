@@ -1,10 +1,9 @@
 import { FieldController } from "dh-marvel/components/field-text/FieldController";
-import React, { useState } from "react";
-import Cards, { Focused } from "react-credit-cards-2";
+import React from "react";
+import Cards from "react-credit-cards-2";
 import "react-credit-cards-2/dist/es/styles-compiled.css";
-import { FieldErrors, useFormContext } from "react-hook-form";
+import { useFormContext } from "react-hook-form";
 import { zodInfer } from "./schema";
-import { useStepFormContext } from "contexts/steps";
 import { Box, Button } from "@mui/material";
 import FieldInputMaskController from "dh-marvel/components/field-mask/FieldMaskController";
 
@@ -13,10 +12,9 @@ export const ThirdStep = () => {
     control,
     trigger,
     watch,
+    getValues,
     formState: { errors },
   } = useFormContext<zodInfer>();
-
-  const { setStep } = useStepFormContext();
 
   const { card } = watch();
 
@@ -29,10 +27,14 @@ export const ThirdStep = () => {
     ]);
 
     if (nameValid && emailValid && lastnameValid) {
-      setStep(1);
+      return true;
     }
+
+    return false;
   };
 
+  console.log("4242 4242 4242 4242".replace(" ", ""));
+  console.log(getValues("card.number"));
   return (
     <Box
       display={"flex"}
@@ -93,7 +95,9 @@ export const ThirdStep = () => {
         hookError={errors?.card?.nameOnCard}
       />
 
-      <Button onClick={triggerErrors}>Finalizar</Button>
+      <Button type="submit" onClick={triggerErrors}>
+        Finalizar
+      </Button>
     </Box>
   );
 };

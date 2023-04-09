@@ -1,4 +1,11 @@
-import { Button, Step, StepLabel, Stepper } from "@mui/material";
+import {
+  Box,
+  Button,
+  Step,
+  StepLabel,
+  Stepper,
+  Typography,
+} from "@mui/material";
 import { useStepFormContext } from "contexts/steps";
 import { QontoStepIcon } from "dh-marvel/components/steps/QontoStepIcon";
 import { QontoConnector } from "dh-marvel/components/steps/Qontos";
@@ -8,11 +15,18 @@ import { FormProvider, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { checkoutSchema, zodInfer } from "dh-marvel/features/checkout/schema";
 import { ThirdStep } from "dh-marvel/features/checkout/ThirdStep";
+import { urlInstance } from "dh-marvel/services/axios/baseURL";
+import { AxiosError } from "axios";
+import { ModalMUI } from "dh-marvel/components/modal";
+import { useState } from "react";
 
 export default function Checkout() {
   const steps = ["Dados Pessoais", "Endereço", "Pagamento"];
 
   const { currentStep } = useStepFormContext();
+
+  const [modalOpen, setModalOpen] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
 
   const methods = useForm<zodInfer>({
     resolver: zodResolver(checkoutSchema),
@@ -20,40 +34,73 @@ export default function Checkout() {
     mode: "all",
   });
 
-  console.log(methods.formState.errors);
-
-  const submitForm = (data: zodInfer) => {
-    console.log(data);
-    console.log(methods.formState.errors.customer);
+  const submitForm = async (data: zodInfer) => {
+    try {
+      await urlInstance.post("/checkout", {
+        ...data,
+      });
+    } catch (error) {
+      if (error instanceof AxiosError) {
+        const { response } = error;
+        const message = response?.data.message;
+        setErrorMessage(message);
+        setModalOpen(true);
+      }
+      console.log(error);
+    }
   };
 
   return (
-    <FormProvider {...methods}>
-      <form
-        onSubmit={methods.handleSubmit(submitForm)}
-        style={{
-          width: "100%",
-          paddingTop: "2rem",
+    <>
+      <FormProvider {...methods}>
+        <form
+          onSubmit={methods.handleSubmit(submitForm)}
+          style={{
+            width: "100%",
+            paddingTop: "2rem",
+          }}
+        >
+          <Stepper
+            alternativeLabel
+            activeStep={currentStep}
+            connector={<QontoConnector />}
+          >
+            {steps.map((label) => (
+              <Step key={label}>
+                <StepLabel StepIconComponent={QontoStepIcon}>{label}</StepLabel>
+              </Step>
+            ))}
+          </Stepper>
+
+          {currentStep === 0 && <FirstStep />}
+
+          {currentStep === 1 && <SecondStep />}
+
+          {currentStep === 2 && <ThirdStep />}
+        </form>
+      </FormProvider>
+
+      <ModalMUI
+        open={modalOpen}
+        onClose={() => {
+          setErrorMessage("");
+          setModalOpen(false);
         }}
       >
-        <Stepper
-          alternativeLabel
-          activeStep={currentStep}
-          connector={<QontoConnector />}
-        >
-          {steps.map((label) => (
-            <Step key={label}>
-              <StepLabel StepIconComponent={QontoStepIcon}>{label}</StepLabel>
-            </Step>
-          ))}
-        </Stepper>
-
-        {currentStep === 0 && <FirstStep />}
-
-        {currentStep === 1 && <SecondStep />}
-
-        {currentStep === 2 && <ThirdStep />}
-      </form>
-    </FormProvider>
+        <Box>
+          <Typography>{errorMessage}</Typography>
+          <Box
+            style={{
+              display: "flex",
+              width: "100%",
+              marginTop: "1rem",
+              justifyContent: "center",
+            }}
+          >
+            <Button onClick={() => setModalOpen(false)}>Fechar</Button>
+          </Box>
+        </Box>
+      </ModalMUI>
+    </>
   );
 }

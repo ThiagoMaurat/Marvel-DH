@@ -6,6 +6,7 @@ import { useFormContext } from "react-hook-form";
 import { zodInfer } from "./schema";
 import { Box, Button } from "@mui/material";
 import FieldInputMaskController from "dh-marvel/components/field-mask/FieldMaskController";
+import { useStepFormContext } from "contexts/steps";
 
 export const ThirdStep = () => {
   const {
@@ -17,6 +18,8 @@ export const ThirdStep = () => {
   } = useFormContext<zodInfer>();
 
   const { card } = watch();
+
+  const { setStep } = useStepFormContext();
 
   const triggerErrors = async () => {
     const [nameValid, emailValid, lastnameValid] = await Promise.all([
@@ -92,6 +95,10 @@ export const ThirdStep = () => {
         label="Nome"
         hookError={errors?.card?.nameOnCard}
       />
+
+      <Button type="submit" onClick={() => setStep(1)}>
+        Voltar
+      </Button>
 
       <Button type="submit" onClick={triggerErrors}>
         Finalizar

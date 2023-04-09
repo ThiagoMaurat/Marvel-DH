@@ -84,6 +84,10 @@ export default function SecondStep() {
         hookError={errors?.customer?.address?.zipCode}
       />
 
+      <Button type="submit" onClick={() => setStep(0)}>
+        Voltar
+      </Button>
+
       <Button onClick={triggerErrors}>Próximo Step</Button>
     </Box>
   );

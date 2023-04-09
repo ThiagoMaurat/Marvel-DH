@@ -1,4 +1,5 @@
 import { Box, Button, Grid, List, ListItem, Typography } from "@mui/material";
+import { useCartContext } from "contexts/cart";
 import { getCharacterIdFromUrl } from "helper/getCharacterId";
 import Image from "next/image";
 import Link from "next/link";
@@ -18,6 +19,8 @@ export default function ComicInfo(comic: Comic) {
   const { title, thumbnail, prices, stock, characters } = comic;
 
   const { push } = useRouter();
+
+  const { setCart } = useCartContext();
 
   const thumb = `${thumbnail.path}.${thumbnail.extension}`;
 
@@ -54,18 +57,22 @@ export default function ComicInfo(comic: Comic) {
 
           <Box>
             <Typography component={"h3"}>Preços</Typography>
-            <List>
-              {prices.map((price) => {
-                return (
-                  <ListItem>
-                    <Typography>{`R$${price.price}`}</Typography>
-                  </ListItem>
-                );
-              })}
-            </List>
+            <Typography>{prices[0].price}</Typography>
           </Box>
 
-          <Button onClick={() => push("/checkout")} disabled={stock <= 0}>
+          <Button
+            onClick={() => {
+              setCart({
+                prices: comic.prices[0].price,
+                stock: comic.stock,
+                thumbnail: thumb,
+                title: comic.title,
+                description: comic.description,
+              });
+              push("/checkout/checkout");
+            }}
+            disabled={stock <= 0}
+          >
             {stock > 0 ? "Comprar" : "Sem estoque"}
           </Button>
         </Box>

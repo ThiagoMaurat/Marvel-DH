@@ -19,6 +19,7 @@ import { urlInstance } from "dh-marvel/services/axios/baseURL";
 import { AxiosError } from "axios";
 import { ModalMUI } from "dh-marvel/components/modal";
 import { useState } from "react";
+import { useRouter } from "next/router";
 
 export default function Checkout() {
   const steps = ["Dados Pessoais", "Endereço", "Pagamento"];
@@ -34,11 +35,15 @@ export default function Checkout() {
     mode: "all",
   });
 
+  const { push } = useRouter();
+
   const submitForm = async (data: zodInfer) => {
     try {
       await urlInstance.post("/checkout", {
         ...data,
       });
+
+      push("/checkout/success");
     } catch (error) {
       if (error instanceof AxiosError) {
         const { response } = error;

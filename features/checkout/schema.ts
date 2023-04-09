@@ -9,10 +9,10 @@ const addressSchema = z.object({
 });
 
 const cardSchema = z.object({
-  number: z.string().nonempty(),
-  cvc: z.string().nonempty(),
-  expDate: z.string().nonempty(),
-  nameOnCard: z.string().nonempty(),
+  number: z.string().nonempty("Número obrigatório"),
+  cvc: z.string().nonempty("CVC obrigatório"),
+  expDate: z.string().nonempty("Data de expiração obrigatória"),
+  nameOnCard: z.string().nonempty("Nome obrigatório"),
 });
 
 export const checkoutSchema = z.object({

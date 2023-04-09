@@ -22,10 +22,10 @@ export const ThirdStep = () => {
 
   const triggerErrors = async () => {
     const [nameValid, emailValid, lastnameValid] = await Promise.all([
-      trigger("card.number", { shouldFocus: true }),
-      trigger("card.cvc", { shouldFocus: true }),
-      trigger("card.expDate", { shouldFocus: true }),
-      trigger("card.nameOnCard", { shouldFocus: true }),
+      trigger("card.number"),
+      trigger("card.cvc"),
+      trigger("card.expDate"),
+      trigger("card.nameOnCard"),
     ]);
 
     if (nameValid && emailValid && lastnameValid) {
@@ -56,6 +56,7 @@ export const ThirdStep = () => {
         inputProps={{ placeholder: "Número" }}
         control={control}
         name="card.number"
+        placeholder="Número"
         defaultValue={""}
         label="Número"
         hookError={errors?.card?.number}
@@ -66,6 +67,7 @@ export const ThirdStep = () => {
         inputProps={{ placeholder: "CVC" }}
         control={control}
         name="card.cvc"
+        placeholder="CVC"
         defaultValue={""}
         label="CVC"
         hookError={errors?.card?.cvc}
@@ -75,6 +77,7 @@ export const ThirdStep = () => {
         mask={"99/99"}
         inputProps={{ placeholder: "Vencimento" }}
         control={control}
+        placeholder="Vencimento"
         name="card.expDate"
         defaultValue={""}
         label="Vencimento"
@@ -90,7 +93,7 @@ export const ThirdStep = () => {
         hookError={errors?.card?.nameOnCard}
       />
 
-      <Button type="submit">Finalizar</Button>
+      <Button onClick={triggerErrors}>Finalizar</Button>
     </Box>
   );
 };

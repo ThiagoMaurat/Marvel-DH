@@ -14,7 +14,25 @@ const FieldMaskBase: React.ForwardRefRenderFunction<
 > = (props: FieldMaskProps, ref): JSX.Element => {
   const { name, ...rest } = props;
 
-  return <InputMask id={name} ref={ref} name={name} {...rest} />;
+  return (
+    <InputMask
+      style={{
+        background: "#D9D9D9",
+        borderRadius: "8px",
+        color: "#141414",
+        fontWeight: "400",
+        fontSize: "20px",
+        width: "100%",
+        height: "45px",
+        border: "none",
+        padding: "5px 8px",
+      }}
+      id={name}
+      ref={ref}
+      name={name}
+      {...rest}
+    />
+  );
 };
 
 const FieldMask = forwardRef(FieldMaskBase);

@@ -16,7 +16,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { checkoutSchema, zodInfer } from "dh-marvel/features/checkout/schema";
 import { ThirdStep } from "dh-marvel/features/checkout/ThirdStep";
 import { urlInstance } from "dh-marvel/services/axios/baseURL";
-import axios, { AxiosError } from "axios";
+import { AxiosError } from "axios";
 import { ModalMUI } from "dh-marvel/components/modal";
 import { useState } from "react";
 import { useRouter } from "next/router";
@@ -43,7 +43,7 @@ export default function Checkout() {
 
   const submitForm = async (data: zodInfer) => {
     try {
-      await axios.post("/checkout", {
+      await urlInstance.post("/checkout", {
         ...data,
       });
 

@@ -1,5 +1,6 @@
 import ComicInfo from "dh-marvel/components/buy-comic";
 import { getComic, getComics } from "dh-marvel/services/marvel/marvel.service";
+import { isEmpty } from "lodash";
 import { GetStaticPaths, GetStaticPropsContext } from "next";
 import React from "react";
 import { Comic } from "types/getComic";
@@ -38,7 +39,10 @@ export const getStaticProps = async (ctx: GetStaticPropsContext<Params>) => {
 
   const comic = await getComic(Number(params?.id));
 
-  if (!comic) return;
+  if (!comic)
+    return {
+      notFound: true,
+    };
 
   return {
     props: comic,

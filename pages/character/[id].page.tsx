@@ -1,5 +1,6 @@
 import CharacterInfo from "dh-marvel/components/character-card";
 import { getCharacter } from "dh-marvel/services/marvel/marvel.service";
+import { isEmpty } from "lodash";
 import { GetServerSideProps, GetServerSidePropsContext } from "next";
 import React from "react";
 import { Character } from "types/getCharacter";

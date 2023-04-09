@@ -13,7 +13,6 @@ export const ThirdStep = () => {
     control,
     trigger,
     watch,
-    getValues,
     formState: { errors },
   } = useFormContext<zodInfer>();
 

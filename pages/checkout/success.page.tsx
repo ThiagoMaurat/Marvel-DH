@@ -3,7 +3,7 @@ import { useCartContext } from "contexts/cart";
 import { useStepFormContext } from "contexts/steps";
 import ComicDetail from "dh-marvel/components/comic-sucess-detailed";
 import { useRouter } from "next/router";
-import React from "react";
+import React, { useEffect } from "react";
 
 interface Props {
   data: Record<string, any>;
@@ -28,9 +28,13 @@ function KeyValueTypography({ data }: Props) {
 
 export default function Success() {
   const { cart } = useCartContext();
-  const { formData } = useStepFormContext();
+  const { formData, setStep } = useStepFormContext();
 
   const { push } = useRouter();
+
+  useEffect(() => {
+    setStep(0);
+  }, []);
 
   return (
     <Box

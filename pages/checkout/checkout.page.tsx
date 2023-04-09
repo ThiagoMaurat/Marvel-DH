@@ -21,7 +21,6 @@ import { ModalMUI } from "dh-marvel/components/modal";
 import { useState } from "react";
 import { useRouter } from "next/router";
 import { useCartContext } from "contexts/cart";
-import ComicDetail from "dh-marvel/components/comic-sucess-detailed";
 import { ComicDetailSteps } from "dh-marvel/components/detailedCheckout";
 
 export default function Checkout() {

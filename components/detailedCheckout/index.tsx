@@ -1,6 +1,5 @@
 import React from "react";
 import { Grid, Paper, Box, Typography } from "@mui/material";
-import { Comic } from "types/getComic";
 import Image from "next/image";
 import { letterCounter } from "helper/letterCounter";
 
@@ -13,14 +12,14 @@ interface ComicDetail {
   children?: React.ReactNode;
 }
 
-const ComicDetail = (props: ComicDetail) => {
+export const ComicDetailSteps = (props: ComicDetail) => {
   const { description, prices, stock, thumbnail, title } = props;
 
   return (
     <>
-      <Grid container spacing={2}>
+      <Grid container spacing={2} maxWidth={"600px"} margin={"0 auto"}>
         <Grid item xs={12} md={5}>
-          <Image src={thumbnail} height={700} width={600} />
+          <Image src={thumbnail} height={300} width={200} />
         </Grid>
         <Grid item xs={12} md={7}>
           <Box display="flex" flexDirection="column" height="100%">
@@ -35,18 +34,9 @@ const ComicDetail = (props: ComicDetail) => {
                 Preço: R$ {prices}
               </Typography>
             </Paper>
-
-            <Paper sx={{ marginTop: "1.5rem" }}>
-              <Typography variant="subtitle1" gutterBottom>
-                Dados da compra:
-              </Typography>
-              <Box flexGrow={1}>{props.children}</Box>
-            </Paper>
           </Box>
         </Grid>
       </Grid>
     </>
   );
 };
-
-export default ComicDetail;

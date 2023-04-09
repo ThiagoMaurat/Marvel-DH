@@ -20,6 +20,9 @@ import { AxiosError } from "axios";
 import { ModalMUI } from "dh-marvel/components/modal";
 import { useState } from "react";
 import { useRouter } from "next/router";
+import { useCartContext } from "contexts/cart";
+import ComicDetail from "dh-marvel/components/comic-sucess-detailed";
+import { ComicDetailSteps } from "dh-marvel/components/detailedCheckout";
 
 export default function Checkout() {
   const steps = ["Dados Pessoais", "Endereço", "Pagamento"];
@@ -28,6 +31,8 @@ export default function Checkout() {
 
   const [modalOpen, setModalOpen] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
+
+  const { cart } = useCartContext();
 
   const methods = useForm<zodInfer>({
     resolver: zodResolver(checkoutSchema),
@@ -82,6 +87,18 @@ export default function Checkout() {
           {currentStep === 1 && <SecondStep />}
 
           {currentStep === 2 && <ThirdStep />}
+
+          <Box>
+            {cart && (
+              <ComicDetailSteps
+                title={cart.title}
+                thumbnail={cart.thumbnail}
+                prices={cart.prices}
+                stock={cart.stock}
+                description={cart.description}
+              />
+            )}
+          </Box>
         </form>
       </FormProvider>
 

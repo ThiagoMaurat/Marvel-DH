@@ -3,6 +3,7 @@ import { CssBaseline, ThemeProvider } from "@mui/material";
 import LayoutGeneral from "dh-marvel/components/layouts/layout-general";
 import { theme } from "dh-marvel/styles/material-theme";
 import { StepFormProvider } from "contexts/steps";
+import { CartProvider } from "contexts/cart";
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
@@ -10,7 +11,9 @@ function MyApp({ Component, pageProps }: AppProps) {
       <CssBaseline />
       <LayoutGeneral>
         <StepFormProvider>
-          <Component {...pageProps} />
+          <CartProvider>
+            <Component {...pageProps} />
+          </CartProvider>
         </StepFormProvider>
       </LayoutGeneral>
       <style jsx global>{`

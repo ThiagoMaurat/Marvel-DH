@@ -24,7 +24,7 @@ import { useRouter } from "next/router";
 export default function Checkout() {
   const steps = ["Dados Pessoais", "Endereço", "Pagamento"];
 
-  const { currentStep } = useStepFormContext();
+  const { currentStep, setFormData } = useStepFormContext();
 
   const [modalOpen, setModalOpen] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
@@ -43,6 +43,7 @@ export default function Checkout() {
         ...data,
       });
 
+      setFormData(data);
       push("/checkout/success");
     } catch (error) {
       if (error instanceof AxiosError) {

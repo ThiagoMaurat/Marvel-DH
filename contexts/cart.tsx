@@ -18,7 +18,7 @@ interface CartContext {
 }
 const CartContext = createContext<CartContext>({} as CartContext);
 
-export const StepFormProvider = ({ children }: CartProviderProps) => {
+export const CartProvider = ({ children }: CartProviderProps) => {
   const [cart, setCart] = useState<CartProps | null>(null);
 
   return (

@@ -69,6 +69,7 @@ export default function ComicInfo(comic: Comic) {
                 title: comic.title,
                 description: comic.description,
               });
+
               push("/checkout/checkout");
             }}
             disabled={stock <= 0}

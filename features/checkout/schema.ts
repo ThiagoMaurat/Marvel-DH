@@ -1,3 +1,4 @@
+import { ParsedUrlQuery } from "querystring";
 import * as z from "zod";
 
 const addressSchema = z.object({

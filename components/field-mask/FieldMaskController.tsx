@@ -37,7 +37,14 @@ const FieldInputMaskController: React.FC<FieldMaskController> = ({
         name={name}
         control={control}
         defaultValue={defaultValue}
-        render={({ field }) => <FieldMaskBase {...rest} {...field} />}
+        render={({ field }) => (
+          <FieldMaskBase
+            name={field.name}
+            value={field.value}
+            onChange={field.onChange}
+            {...rest}
+          />
+        )}
       />
 
       <Typography fontFamily={"Ubuntu"} color="#F91C1C" fontSize={"15px"}>

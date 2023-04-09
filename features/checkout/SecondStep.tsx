@@ -16,11 +16,11 @@ export default function SecondStep() {
 
   const triggerErrors = async () => {
     const [nameValid, emailValid, lastnameValid] = await Promise.all([
-      trigger("customer.address.address1", { shouldFocus: true }),
-      trigger("customer.address.address2", { shouldFocus: true }),
-      trigger("customer.address.city", { shouldFocus: true }),
-      trigger("customer.address.state", { shouldFocus: true }),
-      trigger("customer.address.zipCode", { shouldFocus: true }),
+      trigger("customer.address.address1"),
+      trigger("customer.address.address2"),
+      trigger("customer.address.city"),
+      trigger("customer.address.state"),
+      trigger("customer.address.zipCode"),
     ]);
 
     if (nameValid && emailValid && lastnameValid) {

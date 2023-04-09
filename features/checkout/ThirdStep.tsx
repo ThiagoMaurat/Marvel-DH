@@ -33,8 +33,6 @@ export const ThirdStep = () => {
     return false;
   };
 
-  console.log("4242 4242 4242 4242".replace(" ", ""));
-  console.log(getValues("card.number"));
   return (
     <Box
       display={"flex"}

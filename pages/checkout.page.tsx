@@ -46,7 +46,6 @@ export default function Checkout() {
         setErrorMessage(message);
         setModalOpen(true);
       }
-      console.log(error);
     }
   };
 

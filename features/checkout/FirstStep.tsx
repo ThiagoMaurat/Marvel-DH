@@ -16,9 +16,9 @@ export default function FirstStep() {
 
   const triggerErrors = async () => {
     const [nameValid, emailValid, lastnameValid] = await Promise.all([
-      trigger("customer.name", { shouldFocus: true }),
-      trigger("customer.lastname", { shouldFocus: true }),
-      trigger("customer.email", { shouldFocus: true }),
+      trigger("customer.name"),
+      trigger("customer.lastname"),
+      trigger("customer.email"),
     ]);
 
     if (nameValid && emailValid && lastnameValid) {
